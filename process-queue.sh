@@ -93,6 +93,6 @@ while true; do
     done
 
     echo "----------------------------------------"
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - Done. Sleeping for 10 minutes..."
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Done. Sleeping for $INTERVAL_MINUTES minutes..."
     sleep $INTERVAL
 done
