@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__pndr__list_ideas",
+      "mcp__pndr__list_comments",
+      "WebFetch(domain:github.com)",
+      "mcp__pndr__add_comment",
+      "Bash(git push:*)",
+      "Bash(gh pr create *)",
+      "WebSearch"
+    ]
+  }
+}
