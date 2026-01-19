@@ -1,0 +1,10 @@
+{
+    "project-name": {
+        "repo": "https://github.com/username/repo-name",
+        "localPath": "/path/to/local/repo"
+    },
+    "another-project": {
+        "repo": "https://github.com/username/another-repo",
+        "localPath": "/path/to/another/local/repo"
+    }
+}
