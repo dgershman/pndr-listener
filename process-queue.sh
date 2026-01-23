@@ -6,6 +6,7 @@
 
 INTERVAL_MINUTES=15                              # How often to process the queue
 INTERVAL=$((INTERVAL_MINUTES * 60))              # Auto-calculated seconds
+ADDITIONAL_TAGS="$*"                             # Additional tags to filter by (e.g., "work" or "personal")
 TOKEN_EXPIRY_MINUTES=60                          # OAuth token lifetime
 TOKEN_REFRESH=$(((TOKEN_EXPIRY_MINUTES - 10) * 60))  # Refresh 10 min before expiry
 CLAUDE_CONFIG="$HOME/.claude.json"
@@ -85,10 +86,16 @@ while true; do
         refresh_token
     fi
 
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - Processing queue..."
+    if [ -n "$ADDITIONAL_TAGS" ]; then
+        echo "$(date '+%Y-%m-%d %H:%M:%S') - Processing queue (tags: claude-queue + $ADDITIONAL_TAGS)..."
+        PROMPT="process the queue filtering by additional tags: $ADDITIONAL_TAGS"
+    else
+        echo "$(date '+%Y-%m-%d %H:%M:%S') - Processing queue (tags: claude-queue)..."
+        PROMPT="process the queue"
+    fi
     echo "----------------------------------------"
 
-    claude -p "process the queue" --dangerously-skip-permissions --verbose 2>&1 | while IFS= read -r line; do
+    claude -p "$PROMPT" --dangerously-skip-permissions --verbose 2>&1 | while IFS= read -r line; do
         echo "$line"
     done
 

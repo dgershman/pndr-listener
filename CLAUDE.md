@@ -9,13 +9,20 @@ Use OAuth2 client credentials to authenticate with pndr:
 
 ## Workflow
 1. Authenticate and get access token
-2. Call pndr MCP to list_ideas with tags: ["claude-queue"], status: "active"
-3. For each task, read the description and the latest comment (for iterating on work) don't include the comments that are from [claude-code].  
-4. If starting to work on a task, move it to In-Progress, and comment prefixing [claude-code] and summarize your game plan before you start doing the work.  
-5. If a repo/projects exists in projects.json use the local directory for making code changes.  Also for each feature being worked on, if it's new make a branch.  This may require committing whatever changes were on a previous active branch before switching to a new branch.  It may also requiring continuing to work on the existing branch or staying on the current branch depending upon the scope of the work being done.
-6. Add a comment summarizing what was done prefix with [claude-code] using pndr MCP.  Do not comment on an idea if it's tagged "Review".
-7. If it's a coding related task, branch, commit, and open a pull request for it when the task is completed.
-8. Also tag the idea as "Review" regardless if it's a coding task or not, move it to In-Progress and do not mark is Completed.
+2. Call pndr MCP to list_ideas with tags: ["claude-queue"], status: "active". If additional tags are specified (e.g., "work" or "personal"), only pick up tasks that have BOTH "claude-queue" AND all the specified additional tags.
+3. For each task, read the description and the latest comment (for iterating on work) don't include the comments that are from [claude-code].
+
+### Planning Phase
+4. Move the task to In-Progress.
+5. Enter plan mode (using EnterPlanMode) to explore the codebase and design the implementation approach.
+6. Post the plan as a comment prefixed with [claude-code], then exit plan mode and proceed to execution.
+
+### Execution Phase
+7. If a repo/project exists in projects.json, use the local directory for making code changes. For new features, create a branch. This may require committing changes on a previous active branch before switching, or continuing work on an existing branch depending on scope.
+8. Execute the plan in a single pass.
+9. Add a comment summarizing what was done, prefixed with [claude-code]. Do not comment on an idea if it's tagged "Review".
+10. If it's a coding related task, commit and open a pull request when completed.
+11. Tag the idea as "Review", keep it In-Progress, and do not mark it Completed.
 
 ## New coding projects
 If a task you wind up working on is new, or you get asked to, wire it up to be deployed to Render.  You have access to the command line tool, so you should be able to make a new project.  The github pipeline should be wired up as well to deploy to it on an ongoing basis.  The goal is to be able to preview it quickly without having to stand it up.
