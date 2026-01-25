@@ -11,10 +11,12 @@ TOKEN_EXPIRY_MINUTES=60                          # OAuth token lifetime
 TOKEN_REFRESH=$(((TOKEN_EXPIRY_MINUTES - 10) * 60))  # Refresh 10 min before expiry
 CLAUDE_CONFIG="$HOME/.claude.json"
 
-# Load credentials from .env
+# Load environment variables from .env
 PNDR_DIR="$(dirname "$0")"
 if [ -f "$PNDR_DIR/.env" ]; then
-    export $(grep -E "^PNDR_CLIENT_(ID|SECRET)=" "$PNDR_DIR/.env" | xargs)
+    set -a
+    source "$PNDR_DIR/.env"
+    set +a
 fi
 
 # Verify credentials exist
