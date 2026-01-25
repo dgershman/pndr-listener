@@ -14,15 +14,20 @@ Use OAuth2 client credentials to authenticate with pndr:
 
 ### Planning Phase
 4. Move the task to In-Progress.
-5. Enter plan mode (using EnterPlanMode) to explore the codebase and design the implementation approach.
-6. Post the plan as a comment prefixed with [claude-code], then exit plan mode and proceed to execution.
+5. Explore the codebase to understand the relevant files, patterns, and architecture.
+6. Design an implementation plan and immediately post it as a comment prefixed with [claude-code] using the pndr MCP add_comment tool. Do NOT wait for approval - proceed directly to execution after posting.
 
 ### Execution Phase
 7. If a repo/project exists in projects.json, use the local directory for making code changes. For new features, create a branch. This may require committing changes on a previous active branch before switching, or continuing work on an existing branch depending on scope.
-8. Execute the plan in a single pass.
+8. Execute the plan in a single pass - make all the code changes, run tests if applicable.
 9. Add a comment summarizing what was done, prefixed with [claude-code]. Do not comment on an idea if it's tagged "Review".
 10. If it's a coding related task, commit and open a pull request when completed.
 11. Tag the idea as "Review", keep it In-Progress, and do not mark it Completed.
+
+## Important
+- Do NOT use EnterPlanMode - it requires user approval which blocks autonomous execution.
+- Always post comments using the pndr MCP tools, not just output text.
+- After posting the plan comment, immediately proceed to execution in the same session.
 
 ## New coding projects
 If a task you wind up working on is new, or you get asked to, wire it up to be deployed to Render.  You have access to the command line tool, so you should be able to make a new project.  The github pipeline should be wired up as well to deploy to it on an ongoing basis.  The goal is to be able to preview it quickly without having to stand it up.
