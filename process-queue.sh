@@ -11,20 +11,6 @@ TOKEN_EXPIRY_MINUTES=60                          # OAuth token lifetime
 TOKEN_REFRESH=$(((TOKEN_EXPIRY_MINUTES - 10) * 60))  # Refresh 10 min before expiry
 CLAUDE_CONFIG="$HOME/.claude.json"
 
-# Load environment variables from .env
-PNDR_DIR="$(dirname "$0")"
-if [ -f "$PNDR_DIR/.env" ]; then
-    set -a
-    source "$PNDR_DIR/.env"
-    set +a
-fi
-
-# Verify credentials exist
-if [ -z "$PNDR_CLIENT_ID" ] || [ -z "$PNDR_CLIENT_SECRET" ]; then
-    echo "Error: PNDR_CLIENT_ID and PNDR_CLIENT_SECRET must be set in .env"
-    exit 1
-fi
-
 LAST_TOKEN_REFRESH=0
 
 refresh_token() {

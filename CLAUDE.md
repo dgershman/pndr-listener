@@ -19,10 +19,11 @@ Use OAuth2 client credentials to authenticate with pndr:
 
 ### Execution Phase
 7. If a repo/project exists in projects.json, use the local directory for making code changes. For new features, create a branch. This may require committing changes on a previous active branch before switching, or continuing work on an existing branch depending on scope.
-8. Execute the plan in a single pass - make all the code changes, run tests if applicable.
-9. Add a comment summarizing what was done, prefixed with [claude-code]. Do not comment on an idea if it's tagged "Review".
-10. If it's a coding related task, commit and open a pull request when completed.
-11. Tag the idea as "Review", keep it In-Progress, and do not mark it Completed.
+8. Execute the plan in a single pass - make all the code changes.
+9. Run tests (`npm test`) and build (`npm run build`) before committing. Fix any failures before proceeding.
+10. Add a comment summarizing what was done, prefixed with [claude-code]. Do not comment on an idea if it's tagged "Review".
+11. If it's a coding related task, commit and open a pull request when completed.
+12. Tag the idea as "Review", keep it In-Progress, and do not mark it Completed.
 
 ## Important
 - Do NOT use EnterPlanMode - it requires user approval which blocks autonomous execution.
